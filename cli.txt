@@ -1,0 +1,14 @@
+1. Using AWS CLI
+	a. Create a s3 bucket with your name
+		- aws s3 mb s3://newone-bucket-nk
+
+	b. Enable s3 versioning
+		- aws s3api put-bucket-versioning -bucket newone-bucket-nk MFADelete=Disabled,Status=Enabled
+
+	c. Upload multiple versions of same file
+		- aws s3 cp C:/Users/nnkum/Desktop/file1.txt s3://newone-bucket-nk
+		- aws s3 cp C:/Users/nnkum/Desktop/file1.txt s3://newone-bucket-nk
+
+	d. List out all the versions of the file
+		- aws s3api list-object-versions --bucket newone-bucket-nk --prefix file1.txt
+		- aws s3api list-object-versions --query "Versions[*].VersionId" --bucket newone-bucket-nk --prefix file1.txt
