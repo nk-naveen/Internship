@@ -1,0 +1,81 @@
+Create Stack
+
+Step 1: Goto CloudFormation and choose create Stack
+Step 2: Create Template with all requirements for s3 bucket
+
+-> template.json
+
+		{
+		    "AWSTemplateFormatVersion": "2010-09-09",
+		    "Description": "CloudFormation template for s3 bucket",
+		    "Resources": {
+		        "S3Bucket": {
+		            "DeletionPolicy": "Retain",
+		            "Type": "AWS::S3::Bucket",
+		            "Description": "S3 bucket creation",
+		            "Properties": {
+		                "BucketName": "i-named-this-bucket-nk-2468",
+		                "BucketEncryption": {
+		                    "ServerSideEncryptionConfiguration": [
+		                        {
+		                            "ServerSideEncryptionByDefault": {
+		                                "SSEAlgorithm": "AES256"
+		                            }
+		                        }
+		                    ]
+		                },
+		                "VersioningConfiguration": {
+		                    "Status": "Enabled"
+		                },
+		                "Tags" : [{ "Key" : "Name", "Value" : "Naveen" }]
+
+		            }
+		        },
+		        "S3BucketPolicy": {
+		            "Type": "AWS::S3::BucketPolicy",
+		            "Properties": {
+		                "Bucket": {
+		                    "Ref": "S3Bucket"
+		                },
+		                "PolicyDocument": {
+		                    "Statement": [
+		                        {
+		                            "Action": [
+		                                "s3:*"
+		                            ],
+		                            "Effect": "Allow",
+		                            "Resource": [
+		                                {
+		                                    "Fn::Sub": "arn:aws:s3:::${S3Bucket}"
+		                                },
+		                                {
+		                                    "Fn::Sub": "arn:aws:s3:::${S3Bucket}/*"
+		                                }
+		                            ],
+		                            "Principal": {
+		                                "AWS": [
+		                                    "*"
+		                                ]
+		                            }
+		                        }
+		                    ]
+		                }
+		            }
+		        }
+		    },
+		    "Outputs": {
+		        "S3Bucket": {
+		            "Description": "Bucket Created using this template.",
+		            "Value": {
+		                "Ref": "S3Bucket"
+		            }
+		        }
+		    }
+		}
+
+Step 2: Choose Created template from local machine or s3 bucket to create template.
+
+Step 4: Give stack name "mystack" and provide Tags for reference
+
+Step 5: review and submit
+

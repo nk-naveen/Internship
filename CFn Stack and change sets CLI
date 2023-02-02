@@ -1,0 +1,34 @@
+#stack creation
+aws cloudformation create-stack --stack-name myteststack --template-body file://s3_creation_temp-for-cli.template.json 
+no mandatory{--parameters file://s3_creation_temp-for-cli.template.json}
+
+#Listing completed Stacks
+aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE
+
+#Describing Stacks
+aws cloudformation describe-stacks --stack-name myteststack
+
+#Describing Stack Events
+aws cloudformation describe-stack-events --stack-name myteststack
+
+#Listing Stacks Resources
+aws cloudformation list-stack-resources --stack-name myteststack
+
+#ChangeSet for Stack
+aws cloudformation create-change-set --stack-name arn:aws:cloudformation:us-east-1:269764929305:stack/myteststack/2160cbd0-a2dc-11ed-ab41-12a2d990fc6b --change-set-name this-is-changeset --template-body file://s3_creation_temp-for-cli.template.json
+--use-previous-template
+
+#Listing ChangeSets
+aws cloudformation list-change-sets --stack-name arn:aws:cloudformation:us-east-1:269764929305:stack/myteststack/2160cbd0-a2dc-11ed-ab41-12a2d990fc6b
+
+#Describing ChangeSets
+aws cloudformation describe-change-set --change-set-name arn:aws:cloudformation:us-east-1:269764929305:changeSet/this-is-changeset/61583f96-2a54-456b-b403-f59d2c95face
+
+#Execute ChangeSet
+aws cloudformation execute-change-set --change-set-name arn:aws:cloudformation:us-east-1:269764929305:changeSet/this-is-changeset/61583f96-2a54-456b-b403-f59d2c95face
+
+#Delete ChangeSet
+aws cloudformation delete-change-set --change-set-name arn:aws:cloudformation:us-east-1:269764929305:changeSet/this-is-changeset/61583f96-2a54-456b-b403-f59d2c95face
+
+#Delete Stack
+aws cloudformation delete-stack --stack-name myteststack
