@@ -1,0 +1,37 @@
+To create a stack in AWS CloudFormation (CFN), follow these steps:
+
+ - Prepare a CloudFormation template: This is a JSON or YAML file that describes the resources and their properties that you want to create.
+
+ - Open the AWS Management Console: Log in to the AWS Management Console and navigate to the CloudFormation service.
+
+ - Choose the "Create Stack" option: From the CloudFormation dashboard, click the "Create Stack" button.
+
+ - Select the template: Choose the method for specifying your CloudFormation template, either uploading a file or specifying an Amazon S3 URL.
+
+ - Provide stack details: Enter a name for the stack, and provide any additional parameters that are required.
+
+ - Review and create the stack: Review the information you have provided, and click the "Create" button to create the stack.
+
+ - Monitor stack creation: CloudFormation will create the resources specified in the template, and you can monitor the progress in the CloudFormation console.
+
+ - Once the stack is created, you can view, update, and delete the stack and its resources through the CloudFormation console.
+
+
+
+To create a StackSet in AWS CloudFormation (CFN), follow these steps:
+
+ - Prepare a CloudFormation template: This is a JSON or YAML file that describes the resources and their properties that you want to create.
+
+ - Open the AWS Management Console: Log in to the AWS Management Console and navigate to the CloudFormation service.
+
+ - Choose the "Create StackSet" option: From the CloudFormation dashboard, click the "Create StackSet" button.
+
+ - Provide StackSet details: Enter a name for the StackSet and select the CloudFormation template.
+
+ - Select target accounts and regions: Choose the AWS accounts and regions where you want to create the stack.
+
+ - Configure stack options: Provide the necessary parameters and tags for the stack.
+
+ - Review and create the StackSet: Review the information you have provided, and click the "Create StackSet" button to create the StackSet.
+
+ - Monitor StackSet creation: CloudFormation will create the resources specified in the template in the target accounts and regions, and you can monitor the 	 progress in the CloudFormation console.

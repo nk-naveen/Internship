@@ -1,0 +1,122 @@
+##Here is a list of properties that can be used when declaring an Amazon S3 bucket in an Amazon CloudFormation template:
+{
+  "Type" : "AWS::S3::Bucket",
+  "Properties" : {
+      "AccelerateConfiguration" : AccelerateConfiguration,
+      "AccessControl" : String,
+      "AnalyticsConfigurations" : [ AnalyticsConfiguration, ... ],
+      "BucketEncryption" : BucketEncryption,
+      "BucketName" : String,
+      "CorsConfiguration" : CorsConfiguration,
+      "IntelligentTieringConfigurations" : [ IntelligentTieringConfiguration, ... ],
+      "InventoryConfigurations" : [ InventoryConfiguration, ... ],
+      "LifecycleConfiguration" : LifecycleConfiguration,
+      "LoggingConfiguration" : LoggingConfiguration,
+      "MetricsConfigurations" : [ MetricsConfiguration, ... ],
+      "NotificationConfiguration" : NotificationConfiguration,
+      "ObjectLockConfiguration" : ObjectLockConfiguration,
+      "ObjectLockEnabled" : Boolean,
+      "OwnershipControls" : OwnershipControls,
+      "PublicAccessBlockConfiguration" : PublicAccessBlockConfiguration,
+      "ReplicationConfiguration" : ReplicationConfiguration,
+      "Tags" : [ Tag, ... ],
+      "VersioningConfiguration" : VersioningConfiguration,
+      "WebsiteConfiguration" : WebsiteConfiguration
+    }
+}
+
+##Syntax for properties
+
+{
+  "Resources": {
+    "MyBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "my-bucket",
+        "AccessControl": "Private",
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "ErrorDocument": "error.html"
+        },
+        "LoggingConfiguration": {
+          "DestinationBucketName": "my-logs-bucket",
+          "LogFilePrefix": "s3-logs/"
+        },
+        "CorsConfiguration": {
+          "CorsRules": [
+            {
+              "AllowedHeaders": [
+                "*"
+              ],
+              "AllowedMethods": [
+                "GET",
+                "HEAD"
+              ],
+              "AllowedOrigins": [
+                "https://example.com"
+              ],
+              "MaxAge": 3000
+            }
+          ]
+        },
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "Status": "Enabled",
+              "Transition": {
+                "Days": 30,
+                "StorageClass": "STANDARD_IA"
+              },
+              "ID": "example-rule"
+            }
+          ]
+        },
+        "ReplicationConfiguration": {
+          "Role": "arn:aws:iam::012345678901:role/MyReplicationRole",
+          "Rules": [
+            {
+              "Status": "Enabled",
+              "Destination": {
+                "Bucket": "arn:aws:s3:::destination-bucket"
+              },
+              "ID": "example-rule"
+            }
+          ]
+        },
+        "AccelerateConfiguration": {
+          "AccelerationStatus": "Enabled"
+        },
+        "MetricsConfigurations": [
+          {
+            "Id": "example-metric-config",
+            "Prefix": "example-prefix/",
+            "TagFilters": [
+              {
+                "Key": "example-key",
+                "Value": "example-value"
+              }
+            ]
+          }
+        ],
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        }
+      }
+    }
+  }
+}

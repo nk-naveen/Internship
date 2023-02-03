@@ -1,0 +1,17 @@
+How do we make resource group execution conditional ? 
+
+Writing condition for resource by using intrinsic function, such as "Fn::Equals". The resource group will only be executed if the specified condition is met.
+
+Example:
+
+	Resources:
+	  MyBucket:
+	    Type: AWS::S3::Bucket
+	    Properties:
+	      BucketName: my-bucket
+	    Condition: CreateBucket
+	 
+	Conditions:
+	  CreateBucket: !Equals [!Ref EnvType, "prod"]
+
+Bucket will be created if the value of the parameter "EnvType" is equal to "prod". If the value is not "prod", the resource group will not be created.
